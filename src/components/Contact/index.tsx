@@ -4,10 +4,7 @@ import { useRouter } from "next/navigation";
 
 const Contact = () => {
   const router = useRouter();
-  async function handleSubmit(event: {
-    preventDefault: () => void;
-    target: HTMLFormElement | undefined;
-  }) {
+  async function handleSubmit(event: any) {
     event.preventDefault();
     const formData = new FormData(event.target);
 
