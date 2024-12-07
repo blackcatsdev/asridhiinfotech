@@ -34,19 +34,19 @@ export default function RootLayout({
         {loading ? (
           <PreLoader />
         ) : (
-          // <SessionProvider>
-          <ThemeProvider
-            attribute="class"
-            enableSystem={false}
-            defaultTheme="light"
-          >
-            <ToasterContext />
-            <Header />
-            {children}
-            <Footer />
-            <ScrollToTop />
-          </ThemeProvider>
-          // </SessionProvider>
+          <SessionProvider>
+            <ThemeProvider
+              attribute="class"
+              enableSystem={false}
+              defaultTheme="light"
+            >
+              <ToasterContext />
+              <Header />
+              {children}
+              <Footer />
+              <ScrollToTop />
+            </ThemeProvider>
+          </SessionProvider>
         )}
       </body>
     </html>

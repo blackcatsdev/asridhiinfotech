@@ -1,4 +1,32 @@
+"use client";
+
+import { useRouter } from "next/navigation";
+
 const Contact = () => {
+  const router = useRouter();
+  async function handleSubmit(event) {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+
+    formData.append("access_key", "651996d5-071e-4960-8460-8da29daeae82");
+
+    const object = Object.fromEntries(formData);
+    const json = JSON.stringify(object);
+
+    const response = await fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: json,
+    });
+    const result = await response.json();
+    if (result.success) {
+      console.log(result);
+      router.push("/");
+    }
+  }
   return (
     <section id="contact" className="relative py-20 md:py-[120px]">
       {/* Background layers */}
@@ -28,7 +56,7 @@ const Contact = () => {
                       How Can We Help?
                     </h3>
                     <p className="text-base text-body-color dark:text-dark-6">
-                     info@asridhiinfotech.com
+                      info@asridhiinfotech.com
                     </p>
                   </div>
                 </div>
@@ -45,16 +73,24 @@ const Contact = () => {
               <h3 className="mb-8 text-2xl font-semibold text-dark dark:text-white md:text-[28px] md:leading-[1.42]">
                 Send us a Message
               </h3>
-              <form
-                action="https://api.web3forms.com/submit"
-                method="POST"
-              >
-                <input type="hidden" name="access_key" value="35ef5f28-ba0a-4e30-bd19-7de72c0390e8" />
+              <form onSubmit={handleSubmit}>
+                {/* <input
+                  type="hidden"
+                  name="access_key"
+                  value="651996d5-071e-4960-8460-8da29daeae82"
+                />
                 <input type="hidden" name="form-name" value="contact-form" />
-                <input type="hidden" name="redirect" value="https://web3forms.com/success" />
-                
+                <input
+                  type="hidden"
+                  name="redirect"
+                  value="https://web3forms.com/success"
+                /> */}
+
                 <div className="mb-[22px]">
-                  <label htmlFor="fullName" className="mb-4 block text-sm text-body-color dark:text-dark-6">
+                  <label
+                    htmlFor="fullName"
+                    className="mb-4 block text-sm text-body-color dark:text-dark-6"
+                  >
                     Full Name*
                   </label>
                   <input
@@ -67,7 +103,10 @@ const Contact = () => {
                   />
                 </div>
                 <div className="mb-[22px]">
-                  <label htmlFor="email" className="mb-4 block text-sm text-body-color dark:text-dark-6">
+                  <label
+                    htmlFor="email"
+                    className="mb-4 block text-sm text-body-color dark:text-dark-6"
+                  >
                     Email*
                   </label>
                   <input
@@ -80,7 +119,10 @@ const Contact = () => {
                   />
                 </div>
                 <div className="mb-[22px]">
-                  <label htmlFor="phone" className="mb-4 block text-sm text-body-color dark:text-dark-6">
+                  <label
+                    htmlFor="phone"
+                    className="mb-4 block text-sm text-body-color dark:text-dark-6"
+                  >
                     Phone*
                   </label>
                   <input
@@ -93,7 +135,10 @@ const Contact = () => {
                   />
                 </div>
                 <div className="mb-[30px]">
-                  <label htmlFor="message" className="mb-4 block text-sm text-body-color dark:text-dark-6">
+                  <label
+                    htmlFor="message"
+                    className="mb-4 block text-sm text-body-color dark:text-dark-6"
+                  >
                     Message*
                   </label>
                   <textarea
@@ -108,7 +153,7 @@ const Contact = () => {
                 <div className="mb-0">
                   <button
                     type="submit"
-                    className="inline-flex items-center justify-center rounded-md bg-primary shadow-6  hover:bg-blue-400 border-black px-10 py-3 text-white text-base font-medium transition duration-300 ease-in-out "
+                    className="inline-flex items-center justify-center rounded-md border-black bg-primary  px-10 py-3 text-base font-medium text-white shadow-6 transition duration-300 ease-in-out hover:bg-blue-400 "
                   >
                     Send
                   </button>
